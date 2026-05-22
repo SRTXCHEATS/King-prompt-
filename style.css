@@ -1,0 +1,161 @@
+/* १. आधारभूत सेटिङ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; }
+
+/* २. हेडर र ग्यालरी */
+.glass-header { padding: 40px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.gallery { display: flex; justify-content: center; gap: 20px; padding: 20px; flex-wrap: wrap; }
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; padding: 15px; width: 300px;
+    cursor: pointer; transition: 0.3s;
+}
+.card:hover { transform: translateY(-5px); border-color: #9d4edd; }
+
+.image-slider img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; }
+
+/* ३. पपअप ओभरले (ग्लोसी डिजाइन) */
+.popup-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+.hidden { display: none; }
+
+.popup-content {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 30px; border-radius: 25px;
+    width: 90%; max-width: 450px;
+    text-align: center; border: 1px solid #444;
+    backdrop-filter: blur(15px);
+}
+
+/* ४. ठूलो स्लाइडर र स्वाइप इफेक्ट */
+.large-image-slider {
+    width: 100%; height: 350px; position: relative;
+    overflow: hidden; border-radius: 20px; margin-bottom: 20px;
+}
+.large-image-slider img {
+    width: 100%; height: 100%; object-fit: cover;
+    position: absolute; top: 0; left: 0;
+    opacity: 0; transition: opacity 1s ease-in-out;
+}
+.large-image-slider img.active { opacity: 1; }
+
+/* ५. बटन र अन्य */
+#genBtn {
+    background: #9d4edd; color: white; padding: 12px 25px;
+    border: none; border-radius: 10px; cursor: pointer; margin-top: 15px;
+}
+.code-output {
+    background: #000; color: #0f0; padding: 15px;
+    border-radius: 10px; margin-top: 15px; font-family: monospace;
+}
+.close-btn {
+    position: absolute; top: 10px; right: 15px;
+    background: none; border: none; font-size: 2rem; color: white; cursor: pointer;
+}
+.spinner {
+    width: 40px; height: 40px; border: 4px solid #333;
+    border-top: 4px solid #9d4edd; border-radius: 50%;
+    animation: spin 1s linear infinite; margin: 15px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+
+/* Copy Button को लागि प्रिमियम स्टाइलिङ */
+#copyBtn {
+    display: block;
+    width: 60%;         /* बटनको चौडाइ */
+    margin: 15px auto;  /* बिचमा राख्नको लागि */
+    padding: 12px;
+    background: linear-gradient(135deg, #9d4edd, #7b2cbf); /* प्रिमियम ग्रेडियन्ट */
+    color: white;
+    border: none;
+    border-radius: 50px; /* गोलो कुना */
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+}
+
+#copyBtn:hover {
+    transform: scale(1.05); /* होभर गर्दा अलि ठूलो हुने */
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.6);
+}
+
+/* बटन क्लिक गर्दाको इफेक्ट */
+#copyBtn:active {
+    transform: scale(0.98);
+}
+/* सुरुमा 'Copy Code' बटन लुकाउन */
+#copyBtn {
+    display: block;
+    width: 60%;
+    margin: 15px auto;
+    padding: 12px;
+    background: linear-gradient(135deg, #9d4edd, #7b2cbf);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* बटन लुकाउनको लागि क्लास */
+.hidden {
+    display: none !important;
+}
+
+/* सुन्दर टोस्ट म्यासेजको स्टाइल */
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(157, 78, 221, 0.9); /* पर्पल ग्लोसी कलर */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    z-index: 9999;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Remove blue highlight on tap/touch */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* Remove the blue focus outline on buttons and links */
+button:focus, 
+a:focus, 
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Optional: Add your own custom "premium" focus effect instead */
+button:focus {
+    box-shadow: 0 0 8px rgba(157, 78, 221, 0.6);
+}
+
+
+
+/* Prevent accidental text highlighting */
+.card, .glass-header, .popup-content h3 {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;
+}
