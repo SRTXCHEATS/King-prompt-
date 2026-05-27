@@ -67,7 +67,7 @@ Fashion editorial shot, close-up of [describe the person], wearing a sleek moder
         
               <div class="card" onclick="openPopup(this)" 
              data-prompt="
-A hyper-realistic overhead photograph of a vintage, textured wooden desk. Centered on the desk is a piece of aged, crinkled sketch paper featuring a dramatic, powerful pencil sketch of [YOUR_CHARACTER_NAME]. The character is captured mid-action, in a dynamic pose, with intense cross-hatching and shading defining their form. Near the paper, scattered in a natural, messy arrangement, are [TOOLS] (e.g., a sharpened graphite pencil, an eraser with shavings, a small metal pencil sharpener). A realistic coffee mug stain is visible on the wood surface near the paper. At the bottom right corner of the sketch paper, there is a distinct, clean-lined rectangular box with the text "[YOUR_DESIRED_TITLE]" written inside it in a neat" 
+‎A hyper-realistic overhead photograph of a vintage, textured wooden desk. Centered on the desk is a piece of aged, crinkled sketch paper featuring a dramatic, powerful pencil sketch of [CHARACTER_NAME]. The character is captured mid-action in a dynamic pose, with intense cross-hatching and realistic pencil shading defining their form. Near the paper, scattered in a natural, messy arrangement, are [TOOLS] (e.g., a sharpened graphite pencil, an eraser with shavings, a small metal pencil sharpener). A realistic coffee mug stain is visible on the wood surface near the paper. The sketch paper includes a distinct, clean-lined rectangular box at the bottom right corner containing the exact text: [SRT_X]. Ultra-detailed wood grain, realistic lighting, shallow depth of field, true-to-life paper texture, high-resolution, photoreal, overhead composition." 
              data-img1="https://i.postimg.cc/TPMjQhtt/IMG-20260521-101814-161.jpg" 
              data-img2="https://i.postimg.cc/Rh27GNbd/file-00000000daac720b9cc97411703f5749.png">
             <div class="image-slider">
@@ -115,6 +115,82 @@ Professional photo restoration, ultra-high resolution, 8k, HDR, cinematic lighti
             <div class="image-slider">
                 <img src="https://i.postimg.cc/8PgK4hHG/file-0000000038d07207be8f95b461f0d015.png" class="active" alt="Original">
             </div>
+            <div class="glass-info-box">
+                <h3>8K qulaty enhance</h3>
+            </div>
+        </div>
+        
+        
+        
+        
+             <div class="card" onclick="openPopup(this)" 
+             data-prompt="
+A highly detailed, 4K resolution image merging two source photos into one seamless scene at night under a street light. On the left, a realistic representation of the male from the first photo. On the right, a realistic version of the female character from the second photo, preserving her exact facial features, hairstyle, and outfit in lifelike human form. The couple is in a loving embrace beneath the warm glow of the street lamp, with the distant city softly blurred to create a romantic and peaceful atmosphere."       
+             data-img1="https://i.postimg.cc/yYfJmhpr/Screenshot-20260527-181954.jpg" 
+             data-img2="https://i.postimg.cc/N0vQm5tx/file-00000000723471fab22aecedfae757c8.png">
+            <div class="image-slider">
+                <img src="https://i.postimg.cc/N0vQm5tx/file-00000000723471fab22aecedfae757c8.png" class="active" alt="Original">
+            </div>
+            <div class="glass-info-box">
+                <h3>Combine 2 photo cuple </h3>
+            </div>
+        </div>
+        
+        
+        
+            <div class="card" onclick="openPopup(this)" 
+             data-prompt="
+A candid, half-body 4K resolution image, capturing a randomly moment at night under a glowing street light. The shot is shaky, as if taken while the camera was moving. It features a realistic man and a realistic female companion, with lifelike features and clothing, happily together beneath the lamp, with a city background softly out of focus."
+             data-img1="https://i.postimg.cc/yYfJmhpr/Screenshot-20260527-181954.jpg" 
+             data-img2="https://i.postimg.cc/WbK59ZhB/file-000000000c0c71faacc203eaf7455db8.png">
+            <div class="image-slider">
+                <img src="https://i.postimg.cc/WbK59ZhB/file-000000000c0c71faacc203eaf7455db8.png" class="active" alt="Original">
+            </div>
+            <div class="glass-info-box">
+                <h3>Combine 2 photo random shakey </h3>
+            </div>
+        </div>
+        
+        
+             <div class="card" onclick="openPopup(this)" 
+             data-prompt="
+A professional and badass circular logo designed for a [Tiktok/YouTube] profile, 4K resolution, featuring the bold title text = [YOUR_TITLE] prominently in the center with premium 3D typography. The logo theme should be tailored for [Purpose: e.g., Gaming / Ethical Hacking Education / Tech Tutorials]. Incorporate high-quality realistic elements like [Icon: e.g., neon cyber skull, glowing matrix lines, tech gears] that match the theme. Use a glossy dark background with intense cinematic lighting, vibrant neon accents, and sharp details, making it look like a high-end custom graphic design."
+
+             data-img1="https://i.postimg.cc/x16pKZL1/Screenshot-20260527-190922.jpg" 
+             data-img2="https://i.postimg.cc/L5SVdkjQ/1779888271991.png">
+            <div class="image-slider">
+                <img src="https://i.postimg.cc/L5SVdkjQ/1779888271991.png" class="active" alt="Original">
+            </div>
+            <div class="glass-info-box">
+                <h3>Make ai logo for all </h3>
+            </div>
+        </div>
+    </main>
+
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">×</button>
+            
+            <div class="large-image-slider">
+                <img id="popImg1" class="active" src="" alt="Original">
+                <img id="popImg2" src="" alt="AI">
+            </div>
+            
+            <h3 id="labelDisplay">Original</h3>
+            <p>prompt for chatgpt </p>
+
+            <button id="genBtn" onclick="startGeneration()">Generate AI Prompt</button>
+            
+            <div id="loader" class="hidden"><div class="spinner"></div></div>
+            <div id="typewriter" class="code-output hidden"></div>
+            <button id="copyBtn" class="hidden" onclick="copyCode()">Copy Code</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
             <div class="glass-info-box">
                 <h3>8K qulaty enhance</h3>
             </div>
