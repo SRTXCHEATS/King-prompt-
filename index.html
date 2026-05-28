@@ -7,6 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="advancedLoader" class="adv-loader">
+    <div class="adv-loader-box">
+        <h2 id="loaderTitle">SECURITY FETCHING...</h2>
+        <p id="loaderSubText">Please wait, fetching system files...</p>
+        
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+            <span id="progressText" class="progress-text">0%</span>
+        </div>
+
+        <div class="ai-dots-container" id="aiDotsContainer">
+            <span class="ai-dot"></span>
+            <span class="ai-dot"></span>
+            <span class="ai-dot"></span>
+        </div>
+
+        <div id="poorNetBox" class="poor-net-alert hidden">
+            ⚠️ Your internet is very poor. Loading assets slowly...
+        </div>
+
+        <div id="srtBrandBox" class="srt-brand-display hidden">
+            <span class="srt-letter">S</span>
+            <span class="srt-letter">R</span>
+            <span class="srt-letter">T</span>
+            <span class="srt-letter-x">X</span>
+        </div>
+
+        <button id="forceOpenBtn" class="force-open-btn" onclick="forceSkipLoading()">
+            Open Without Loading
+        </button>
+    </div>
+</div>
+
+
+
+
+
+
+
 
     <header class="glass-header">
         <h1>SRT X CHEATS</h1>
@@ -15,10 +54,10 @@
     <main class="gallery">
         <div class="card" onclick="openPopup(this)" 
              data-prompt="‎Please take this low-resolution, vintage photo and enhance it to sharp 4K resolution. Intelligently reconstruct the fine details, restore the natural textures, and sharpen the edges without losing the authentic feel of the original. Please remove noise, fix any blurriness, and upscale the image to a crisp, high-definition quality." 
-             data-img1="https://i.postimg.cc/7Y83M5bG/IMG-20260520-211021-086.jpg" 
-             data-img2="https://i.postimg.cc/2j4bY2js/file-00000000a19871fabcb8e3f7ad1a1605.png">
+             data-img1="https://i.postimg.cc/d0RZRrTm/Screenshot-20260528-124739.jpg" 
+             data-img2="https://i.postimg.cc/fTb7w2S5/file-00000000a0d07206bb0d0bcf1bda8cce.png">
             <div class="image-slider">
-                <img src="https://i.postimg.cc/2j4bY2js/file-00000000a19871fabcb8e3f7ad1a1605.png" class="active" alt="Original">
+                <img src="https://i.postimg.cc/fTb7w2S5/file-00000000a0d07206bb0d0bcf1bda8cce.png" class="active" alt="Original">
                 
             </div>
             <div class="glass-info-box">
@@ -42,10 +81,10 @@ Upscale this low-resolution image to 8K Ultra High Definition while applying a c
         <div class="card" onclick="openPopup(this)" 
              data-prompt="
 Upscale this image to 8K resolution, applying advanced noise reduction to clean up the grain while preserving fine details. Transform the scene into a cinematic night photograph with high dynamic range. Enhance the contrast between deep, rich shadows and vibrant, soft light sources (like streetlights or neon). The final image should look like a high-end film still, with razor-sharp textures, authentic depth, and a professional, moody atmospheric nighttime aesthetic." 
-             data-img1="https://i.postimg.cc/prFKS4sL/Screenshot-20260519-074140.jpg" 
-             data-img2="https://i.postimg.cc/P54Y0mQS/file-000000009d1c71fa8094d1f58a1bd4ab.png">
+             data-img1="https://i.postimg.cc/mDjPF41N/IMG-20260528-WA0021.jpg" 
+             data-img2="https://i.postimg.cc/6qTp2vX7/file-0000000008cc72079d813973b5218699.png">
             <div class="image-slider">
-                <img src="https://i.postimg.cc/P54Y0mQS/file-000000009d1c71fa8094d1f58a1bd4ab.png" class="active" alt="Original">
+                <img src="https://i.postimg.cc/6qTp2vX7/file-0000000008cc72079d813973b5218699.png" class="active" alt="Original">
             </div>
             <div class="glass-info-box">
                 <h3>night light cinematic</h3>
@@ -68,10 +107,10 @@ Fashion editorial shot, close-up of [describe the person], wearing a sleek moder
               <div class="card" onclick="openPopup(this)" 
              data-prompt="
 ‎A hyper-realistic overhead photograph of a vintage, textured wooden desk. Centered on the desk is a piece of aged, crinkled sketch paper featuring a dramatic, powerful pencil sketch of [CHARACTER_NAME]. The character is captured mid-action in a dynamic pose, with intense cross-hatching and realistic pencil shading defining their form. Near the paper, scattered in a natural, messy arrangement, are [TOOLS] (e.g., a sharpened graphite pencil, an eraser with shavings, a small metal pencil sharpener). A realistic coffee mug stain is visible on the wood surface near the paper. The sketch paper includes a distinct, clean-lined rectangular box at the bottom right corner containing the exact text: [SRT_X]. Ultra-detailed wood grain, realistic lighting, shallow depth of field, true-to-life paper texture, high-resolution, photoreal, overhead composition." 
-             data-img1="https://i.postimg.cc/TPMjQhtt/IMG-20260521-101814-161.jpg" 
-             data-img2="https://i.postimg.cc/Rh27GNbd/file-00000000daac720b9cc97411703f5749.png">
+             data-img1="https://i.postimg.cc/zf9sSHKk/file-00000000bb4c720ba31a586b245ce416.png" 
+             data-img2="https://i.postimg.cc/x8r9CFtp/file-000000009cc871f8a08ccb51ccd1ef79.png">
             <div class="image-slider">
-                <img src="https://i.postimg.cc/Rh27GNbd/file-00000000daac720b9cc97411703f5749.png" class="active" alt="Original">
+                <img src="https://i.postimg.cc/x8r9CFtp/file-000000009cc871f8a08ccb51ccd1ef79.png" class="active" alt="Original">
             </div>
             <div class="glass-info-box">
                 <h3>The Highly Detailed & Realistic "Messy Desk" Scene</h3>
@@ -177,36 +216,7 @@ A professional and badass circular logo designed for a [Tiktok/YouTube] profile,
             </div>
             
             <h3 id="labelDisplay">Original</h3>
-            <p>prompt for chatgpt </p>
-
-            <button id="genBtn" onclick="startGeneration()">Generate AI Prompt</button>
             
-            <div id="loader" class="hidden"><div class="spinner"></div></div>
-            <div id="typewriter" class="code-output hidden"></div>
-            <button id="copyBtn" class="hidden" onclick="copyCode()">Copy Code</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
-            <div class="glass-info-box">
-                <h3>8K qulaty enhance</h3>
-            </div>
-        </div>
-    </main>
-
-    <div id="popup" class="popup-overlay hidden">
-        <div class="popup-content">
-            <button class="close-btn" onclick="closePopup()">×</button>
-            
-            <div class="large-image-slider">
-                <img id="popImg1" class="active" src="" alt="Original">
-                <img id="popImg2" src="" alt="AI Enhanced">
-            </div>
-            
-            <h3 id="labelDisplay">Original</h3>
             <p>prompt for chatgpt </p>
 
             <button id="genBtn" onclick="startGeneration()">Generate AI Prompt</button>
