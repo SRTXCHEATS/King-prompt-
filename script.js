@@ -81,7 +81,7 @@ function startGeneration() {
             }
         }
         type();
-    }, 1200); // १.२ सेकेन्ड लोडर घुम्ने समय (हल्का रियालिस्टिक देखाउन)
+    }, 20000); // १.२ सेकेन्ड लोडर घुम्ने समय (हल्का रियालिस्टिक देखाउन)
 }
 
 
@@ -116,124 +116,171 @@ function showToast(message) {
     setTimeout(() => { 
         toast.style.animation = "fadeIn 0.3s reverse"; // Smooth fade out
         setTimeout(() => { toast.remove(); }, 300);
-    }, 2500);
+    }, 8000);
 }
 
 // ==========================================
-// 🔥 SRT BRAND REAL PERCENTAGE LOADER LOGIC
+// 🔥 AUTO LOADER — closes when ALL images loaded
 // ==========================================
 let globalLoaderFinished = false;
 let poorInternetTimer;
 
 window.addEventListener('DOMContentLoaded', () => {
-    const progressBar = document.getElementById('progressBar');
+    const progressBar  = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
-    const poorNetBox = document.getElementById('poorNetBox');
+    const poorNetBox   = document.getElementById('poorNetBox');
 
-    let totalAssets = 0;
-    let loadedAssets = 0;
-    let minimumTimePassed = false;
-    let imageTrackingComplete = false;
+    // Collect ONLY the gallery card images (data-img1 / data-img2 src attrs)
+    // These are the postimg.cc images that matter for "ready"
+    const cards = document.querySelectorAll('.card[data-img1]');
+    const imgUrls = [];
+    cards.forEach(card => {
+        imgUrls.push(card.getAttribute('data-img1'));
+        imgUrls.push(card.getAttribute('data-img2'));
+    });
 
-    // स्लो इन्टरनेट अलर्ट टिमर (७ सेकेन्ड)
+    // Also grab any visible <img> tags in the gallery
+    const visibleImgs = document.querySelectorAll('.image-slider img');
+    visibleImgs.forEach(img => {
+        if (img.src && !imgUrls.includes(img.src)) imgUrls.push(img.src);
+    });
+
+    const totalAssets = imgUrls.length;
+    let loadedAssets  = 0;
+
+    // Slow connection alert after 6 seconds
     poorInternetTimer = setTimeout(() => {
-        if (!imageTrackingComplete && !globalLoaderFinished) {
+        if (!globalLoaderFinished) {
             poorNetBox.classList.remove('hidden');
         }
-    }, 7000);
-
-    // ३ सेकेन्ड सम्म "Security Fetching" होल्ड गर्ने
-    setTimeout(() => {
-        minimumTimePassed = true;
-        checkPreloaderConditions();
-    }, 3000);
-
-    // इमेज ट्र्याकिङ लोजिक
-    const allImgs = document.querySelectorAll('img');
-    totalAssets = allImgs.length;
-
-    if (totalAssets === 0) {
-        updateProgress(100);
-        imageTrackingComplete = true;
-        checkPreloaderConditions();
-    } else {
-        allImgs.forEach((img) => {
-            if (img.complete) {
-                assetLoadedSuccess();
-            } else {
-                img.addEventListener('load', assetLoadedSuccess);
-                img.addEventListener('error', assetLoadedSuccess);
-            }
-        });
-    }
-
-    function assetLoadedSuccess() {
-        if (globalLoaderFinished) return;
-        loadedAssets++;
-        
-        let percentage = Math.round((loadedAssets / totalAssets) * 100);
-        updateProgress(percentage);
-
-        if (loadedAssets >= totalAssets) {
-            imageTrackingComplete = true;
-            checkPreloaderConditions();
-        }
-    }
+    }, 6000);
 
     function updateProgress(value) {
-        if (progressBar && progressText) {
-            progressBar.style.width = value + '%';
-            progressText.innerText = value + '%';
-        }
+        const clamped = Math.min(100, value);
+        if (progressBar)  progressBar.style.width = clamped + '%';
+        if (progressText) progressText.innerText  = clamped + '%';
     }
 
-    function checkPreloaderConditions() {
-        if (imageTrackingComplete && minimumTimePassed) {
+    function onAssetDone() {
+        if (globalLoaderFinished) return;
+        loadedAssets++;
+        const pct = Math.round((loadedAssets / totalAssets) * 100);
+        updateProgress(pct);
+
+        if (loadedAssets >= totalAssets) {
+            // All images loaded — show brand then close
             showSRTBrandAnimation();
         }
     }
+
+    if (totalAssets === 0) {
+        // No images to track — close after minimal 1.5s
+        setTimeout(showSRTBrandAnimation, 1500);
+        return;
+    }
+
+    // Pre-load every image via Image() objects so we get load/error events
+    imgUrls.forEach(url => {
+        const img = new Image();
+        img.onload  = onAssetDone;
+        img.onerror = onAssetDone; // count errors too so we never get stuck
+        img.src     = url;
+    });
 });
 
-// 🔥 काउन्टडाउन हटाएर नयाँ SRT एनिमेसन देखाउने र ३ सेकेन्डपछि होमपेज खोल्ने फंक्शन
+// Show SRT brand logo for 2s then dismiss the loader
 function showSRTBrandAnimation() {
     if (globalLoaderFinished) return;
     globalLoaderFinished = true;
 
     clearTimeout(poorInternetTimer);
 
-    const loaderTitle = document.getElementById('loaderTitle');
-    const loaderSubText = document.getElementById('loaderSubText');
-    const srtBrandBox = document.getElementById('srtBrandBox');
-    const poorNetBox = document.getElementById('poorNetBox');
-    const forceOpenBtn = document.getElementById('forceOpenBtn');
-    const aiDotsContainer = document.getElementById('aiDotsContainer');
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
+    const loaderTitle    = document.getElementById('loaderTitle');
+    const loaderSubText  = document.getElementById('loaderSubText');
+    const srtBrandBox    = document.getElementById('srtBrandBox');
+    const poorNetBox     = document.getElementById('poorNetBox');
+    const forceOpenBtn   = document.getElementById('forceOpenBtn');
+    const aiDotsContainer= document.getElementById('aiDotsContainer');
+    const progressBar    = document.getElementById('progressBar');
+    const progressText   = document.getElementById('progressText');
 
-    // लोडिङ र थ्री-डट्स हटाउने
-    if(poorNetBox) poorNetBox.classList.add('hidden');
-    if(forceOpenBtn) forceOpenBtn.classList.add('hidden');
-    if(aiDotsContainer) aiDotsContainer.classList.add('hidden');
-    
-    if(progressBar) progressBar.style.width = '100%';
-    if(progressText) progressText.innerText = '100%';
+    if (poorNetBox)      poorNetBox.classList.add('hidden');
+    if (forceOpenBtn)    forceOpenBtn.classList.add('hidden');
+    if (aiDotsContainer) aiDotsContainer.classList.add('hidden');
+    if (progressBar)     progressBar.style.width = '100%';
+    if (progressText)    progressText.innerText  = '100%';
 
-    // ब्रान्ड टाइटल अपडेट
-    loaderTitle.innerText = "ACCESS GRANTED";
+    loaderTitle.innerText  = "ACCESS GRANTED";
     loaderSubText.innerText = "Welcome to SRT Store";
-    
-    // SRT बक्स शो गर्ने (CSS ले आफै एनिमेसन र बाउन्स गराउँछ)
+
     if (srtBrandBox) {
         srtBrandBox.classList.remove('hidden');
-
-        // ठ्याक्कै ३ सेकेन्ड (3000ms) सम्म SRT उफ्रेको देखाएर वेबसाइट भित्र छिराउने
+        // Show brand animation for 2 seconds then fade out
         setTimeout(() => {
             document.getElementById('advancedLoader').classList.add('fade-out');
-        }, 3000);
+        }, 2000);
     }
 }
 
-// बिना लोडिङ डाइरेक्ट स्किप फंक्शन
+// Skip button still works
 function forceSkipLoading() {
     showSRTBrandAnimation();
+}
+
+
+// ==========================================
+// 🔎 SEARCH / FILTER LOGIC
+// ==========================================
+function filterCards(query) {
+  const clearBtn = document.getElementById('clearBtn');
+  const countEl  = document.getElementById('searchCount');
+  const cards    = document.querySelectorAll('#gallery .card');
+  const q        = query.trim().toLowerCase();
+
+  // show/hide clear button
+  clearBtn.classList.toggle('hidden', q === '');
+
+  let visible = 0;
+
+  // remove old empty state
+  const oldEmpty = document.getElementById('emptyState');
+  if (oldEmpty) oldEmpty.remove();
+
+  cards.forEach(card => {
+    const title  = card.querySelector('h3')?.innerText.toLowerCase() || '';
+    const badge  = card.querySelector('.card-badge')?.innerText.toLowerCase() || '';
+    const prompt = (card.getAttribute('data-prompt') || '').toLowerCase();
+
+    const match = q === '' || title.includes(q) || badge.includes(q) || prompt.includes(q);
+
+    if (match) {
+      card.classList.remove('hidden-card');
+      visible++;
+    } else {
+      card.classList.add('hidden-card');
+    }
+  });
+
+  // count label
+  if (q === '') {
+    countEl.innerHTML = '';
+  } else {
+    countEl.innerHTML = `<span>${visible}</span> template${visible !== 1 ? 's' : ''} found`;
+  }
+
+  // empty state
+  if (visible === 0 && q !== '') {
+    const empty = document.createElement('div');
+    empty.id = 'emptyState';
+    empty.className = 'gallery-empty';
+    empty.innerHTML = `<span class="empty-icon">🔍</span><p>No templates found for "<strong>${query}</strong>"</p>`;
+    document.getElementById('gallery').appendChild(empty);
+  }
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  filterCards('');
+  input.focus();
 }
